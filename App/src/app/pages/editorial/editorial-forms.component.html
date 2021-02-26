@@ -1,0 +1,96 @@
+
+<div>
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col text-center">
+                <h1>{{title}}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <label class="form-label">Nombre editorial</label>
+                    <input type="text" formControlName="nombreEditorial" class="form-control">
+                    <div class="validationErrorRed">
+                        <ng-container *ngFor="let validation of validationFormMessage.nombreEditorial">
+                            <div *ngIf="isValid('nombreEditorial', validation.type)">
+                                <small>{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label class="form-label">Dirección</label>
+                    <input type="text" formControlName="Direccion" class="form-control">
+                    <div class="validationErrorRed">
+                        <ng-container *ngFor="let validation of validationFormMessage.Direccion">
+                            <div *ngIf="isValid('Direccion', validation.type)">
+                                <small>{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <label class="form-label">Teléfono</label>
+                    <input type="phone" formControlName="Telefono" class="form-control">
+                    <div class="validationErrorRed">
+                        <ng-container *ngFor="let validation of validationFormMessage.Telefono">
+                            <div *ngIf="isValid('Telefono', validation.type)">
+                                <small>{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label class="form-label">Corro electrónico</label>
+                    <input type="text" formControlName="email" class="form-control">
+                    <div class="validationErrorRed">
+                        <ng-container *ngFor="let validation of validationFormMessage.email">
+                            <div *ngIf="isValid('email', validation.type)">
+                                <small>{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label class="form-label">Máximo libros permitidos</label>
+                    <input type="number" formControlName="MaxLibrosRegistrados" class="form-control">
+                    <div class="validationErrorRed">
+                        <ng-container *ngFor="let validation of validationFormMessage.MaxLibrosRegistrados">
+                            <div *ngIf="isValid('MaxLibrosRegistrados', validation.type)">
+                                <small>{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-footer border-0 text-right">
+            <a [routerLink]="['/editorial']" class="btn btn-warning shadow-none mr-2">
+                Regresar
+            </a>
+            <button type="button" (click)="saveForm()" class="btn shadow-none" [ngClass]="{'btn-success': id, 'btn-primary': !id}"
+                [disabled]="form.invalid">
+                {{btnName}}
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-10">
+        <h3>Autor</h3>
+    </div>
+    <div class="col-2 align-self-end">
+        <a [routerLink]="['/autornew']" class="btn btn-primary btn-block py-2 mb-2">
+            <span class="icon icon-plus mr-2"></span> Nuevo
+        </a>
+    </div>
+</div>
+<table class="table table-hover shadow">
+    <thead class="table-primary">
+        <tr>
+            <th style="width: 5%;" scope="col">#</th>
+            <th style="width: 30%;" scope="col">Nombre</th>
+            <th style="width: 15%;" scope="col">Ciudad</th>
+            <th style="width: 15%;" scope="col">Email</th>
+            <th style="width: 10%;" scope="col">Fech Nace</th>            
+            <th style="width: 25%;" scope="col" class="text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let autor of autores;let indexOfelement=index; ">
+            <th scope="row">{{ autor.idAutor }}</th>
+            <td>{{ autor.nombreAutor }}</td>
+            <td>{{ autor.ciudad }}</td>
+            <td>{{ autor.email }}</td>
+            <td>{{ autor.fechaNace | date: "short":"+0000" }}</td>            
+            <!-- <td class="text-center">
+                <ng-container *ngIf="!i.estado">
+                    <span class="icon status icon-toggle-left text-danger"></span>
+                </ng-container>
+                <ng-container *ngIf="i.estado">
+                    <span class="icon status icon-toggle-right text-success"></span>
+                </ng-container>
+            </td> -->
+            <td class="text-center">
+                <button class="btn btn-success btn-sm mr-1 shadow-none" title="Modificar registro"
+                    (click)="goToAutor(autor)">
+                    Editar
+                    <span class="icon icon-edit-3 text-white"></span>
+                </button>
+                <button class="btn btn-danger btn-sm shadow-none" title="Eliminar registro" data-toggle="modal"
+                    data-target="#deleteModal" (click)="delete(autor.idAutor, indexOfelement)">
+                    Eliminar
+                    <span class="icon icon-trash-2 text-white"></span>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Modal 
+<div class="modal fade" id="deleteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Eliminar Registro</h5>
+            </div>
+            <div class="modal-body">
+                <p *ngIf="id">
+                    ¿Está seguro de eliminar impuesto <b>{{ id.name }}</b>?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning btn-sm shadow-none" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger btn-sm shadow-none" data-dismiss="modal"
+                    (click)="delete(editorial.id)">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+-->

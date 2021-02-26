@@ -1,0 +1,74 @@
+<div>
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col text-center">
+                <h1>{{title}}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <label class="form-label">Nombre autor</label>
+                    <input type="text" formControlName="nombreAutor" class="form-control">
+                    <div class="validationErrorRed">
+                        <ng-container *ngFor="let validation of validationFormMessage.nombreAutor">
+                            <div *ngIf="isValid('nombreAutor', validation.type)">
+                                <small>{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label class="form-label">Ciudad</label>
+                    <input type="text" formControlName="Ciudad" class="form-control">
+                    <div class="validationErrorRed">
+                        <ng-container *ngFor="let validation of validationFormMessage.Ciudad">
+                            <div *ngIf="isValid('Ciudad', validation.type)">
+                                <small>{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">        
+            <div class="col">
+                <div class="mb-3">
+                    <label class="form-label">Corro electrónico</label>
+                    <input type="text" formControlName="email" class="form-control">
+                    <div class="validationErrorRed">
+                        <ng-container *ngFor="let validation of validationFormMessage.email">
+                            <div *ngIf="isValid('email', validation.type)">
+                                <small>{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label class="form-label">Fecha Nacimiento</label>
+                    <input type="date" formControlName="FechaNace" class="form-control">
+                    <div class="validationErrorRed">
+                        <ng-container *ngFor="let validation of validationFormMessage.FechaNace">
+                            <div *ngIf="isValid('FechaNace', validation.type)">
+                                <small>{{validation.message}}</small>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>            
+            </div>
+        </div>
+        <div class="card-footer border-0 text-right">
+            <a [routerLink]="['/autor']" class="btn btn-warning shadow-none mr-2">
+                Regresar
+            </a>
+            <button type="button" (click)="saveForm()" class="btn shadow-none"
+                [ngClass]="{'btn-success': id, 'btn-primary': !id}" [disabled]="form.invalid">
+                {{btnName}}
+            </button>
+        </div>
+    </form>
+</div>
