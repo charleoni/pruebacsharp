@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiserviceService } from 'src/app/services/apiservice.service';
 import { StorageService } from 'src/app/services/storage.service';
 
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editorial-forms',
@@ -18,31 +19,31 @@ public validationFormMessage = {
 	nombreEditorial: [
 			{
 				type: 'required',
-				message: 'Este nombre es obligatorio',
+				message: 'Nombre editorial es obligatorio',
 			},
 		],
     Direccion: [
 			{
 				type: 'required',
-				message: 'Este campo es obligatorio',
+				message: 'Dirección es obligatorio',
 			},
 		],
     Telefono: [
 			{
 				type: 'required',
-				message: 'Este campo es obligatorio',
+				message: 'Número de teléfono es obligatorio',
 			},
 		],
     email: [
 			{
 				type: 'required',
-				message: 'Este campo es obligatorio',
+				message: 'El correo electrónico es obligatorio',
 			},
 		],
     MaxLibrosRegistrados: [
 			{
 				type: 'required',
-				message: 'Este campo es obligatorio',
+				message: 'Máximo número de libros es obligatorio',
 			},
 			{
 				type: 'min',
@@ -90,10 +91,11 @@ public validationFormMessage = {
 		}
 		this.httpService.update(`editorial`, object).subscribe(resp => {
 			this.router.navigate(['/editorial']);
+			this.confirmar();
 		})
       } else {
-        this.httpService.create('editorial', this.form.value).subscribe(resp => {
-			alert(`Registro exitoso!!!`)
+        this.httpService.create('editorial', this.form.value).subscribe(resp => {			
+			this.confirmar();
 		})
       }
     
@@ -113,5 +115,53 @@ public validationFormMessage = {
 		const f = this.form.get(field)
 		return f.hasError(validationType) && (f.dirty || f.touched)
 	}
+
+	grabar() {
+    
+    Swal.fire({
+      title: '¿Estas seguro?',
+      html: `¡Deseas grabar el registro</strong>!`,
+      icon: 'warning',
+      // input: 'textarea',
+      // inputPlaceholder: 'Ingrese por favor el motivo ...',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Si, Grabar!',
+      cancelButtonText: 'Cancelar'})
+    //   inputValidator: (value) => {
+    //     console.log(value.trim().length);
+    //     return new Promise((resolve) => {
+    //       if (value.trim().length !== 0 && !(value.trim().length < 10)) {
+    //         resolve();
+    //       } else {
+    //         if (value.trim().length === 0) {
+    //           resolve('El motivo es obligatoria :)');
+    //         } else if (value.trim().length < 10) {
+    //           resolve('La observación debe contener al menos 10 caractares :)');
+    //         }
+    //       }
+    //     });
+    //   },
+    // })
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.saveForm()
+        } else if (result.isDismissed) {
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  private confirmar(){
+    Swal.fire({
+      title: '!Guardar registro!',
+      text: '¡El registro ha sido guardado!',
+      icon: 'success',
+      confirmButtonText: 'Ok',
+    });
+  }
 
 }

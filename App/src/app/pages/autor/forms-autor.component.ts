@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiserviceService } from 'src/app/services/apiservice.service';
 import { StorageService } from 'src/app/services/storage.service';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-forms-autor',
   templateUrl: './forms-autor.component.html',
@@ -17,25 +19,25 @@ export class FormsAutorComponent implements OnInit {
 	nombreAutor: [
 			{
 				type: 'required',
-				message: 'Este nombre es obligatorio',
+				message: 'El nomnbre de autor es obligatorio',
 			},
 		],
     Ciudad: [
 			{
 				type: 'required',
-				message: 'Este campo es obligatorio',
+				message: 'La ciudad es obligatoria',
 			},
 		],
     email: [
 			{
 				type: 'required',
-				message: 'Este campo es obligatorio',
+				message: 'El correo electrónico es obligatorio',
 			},
 		],
     FechaNace: [
 			{
 				type: 'required',
-				message: 'Este campo es obligatorio',
+				message: 'La fecha de nacimiento es obligatoria',
 			},
 		]
 }
@@ -78,13 +80,13 @@ export class FormsAutorComponent implements OnInit {
 			...this.form.value
 		}
 		this.httpService.update(`autor`, object).subscribe(resp => {
-			this.router.navigate(['/autor']);
+			this.router.navigate(['/autor']);			
 		})
       } else {
-        this.httpService.create('autor', this.form.value).subscribe(resp => {
-			alert(`Registro exitoso!!!`)
+        this.httpService.create('autor', this.form.value).subscribe(resp => {			
 		})
       }
+	  this.confirmar();
     
   	}
 
@@ -102,6 +104,54 @@ export class FormsAutorComponent implements OnInit {
 		const f = this.form.get(field)
 		return f.hasError(validationType) && (f.dirty || f.touched)
 	}
+	
+	grabar() {
+    
+    Swal.fire({
+      title: '¿Estas seguro?',
+      html: `¡Deseas grabar el registro</strong>!`,
+      icon: 'warning',
+      // input: 'textarea',
+      // inputPlaceholder: 'Ingrese por favor el motivo ...',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Si, Grabar!',
+      cancelButtonText: 'Cancelar'})
+    //   inputValidator: (value) => {
+    //     console.log(value.trim().length);
+    //     return new Promise((resolve) => {
+    //       if (value.trim().length !== 0 && !(value.trim().length < 10)) {
+    //         resolve();
+    //       } else {
+    //         if (value.trim().length === 0) {
+    //           resolve('El motivo es obligatoria :)');
+    //         } else if (value.trim().length < 10) {
+    //           resolve('La observación debe contener al menos 10 caractares :)');
+    //         }
+    //       }
+    //     });
+    //   },
+    // })
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.saveForm()
+        } else if (result.isDismissed) {
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  private confirmar(){
+    Swal.fire({
+      title: '!Guardar registro!',
+      text: '¡El registro ha sido guardado!',
+      icon: 'success',
+      confirmButtonText: 'Ok',
+    });
+  }
 
   
 }

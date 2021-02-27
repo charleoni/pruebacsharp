@@ -65,7 +65,7 @@
             <a [routerLink]="['/autor']" class="btn btn-warning shadow-none mr-2">
                 Regresar
             </a>
-            <button type="button" (click)="saveForm()" class="btn shadow-none"
+            <button type="button" (click)="grabar()" class="btn shadow-none"
                 [ngClass]="{'btn-success': id, 'btn-primary': !id}" [disabled]="form.invalid">
                 {{btnName}}
             </button>

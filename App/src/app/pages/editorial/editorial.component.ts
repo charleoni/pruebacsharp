@@ -103,7 +103,7 @@ export class EditorialComponent implements OnInit {
 
   private confirmar(){
     Swal.fire({
-      title: '!Borrar archivo!',
+      title: '!Borrar registro!',
       text: '¡El registro ha sido eliminado!',
       icon: 'success',
       confirmButtonText: 'Ok',
