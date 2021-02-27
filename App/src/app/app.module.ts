@@ -14,6 +14,9 @@ import { EditorialFormsComponent } from './pages/editorial/editorial-forms.compo
 import { FormsAutorComponent } from './pages/autor/forms-autor.component';
 import { FormsLibrosComponent } from './pages/libros/forms-libros.component';
 
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { MenuComponent } from './components/menu/menu.component';
+
 
 @NgModule({
   declarations: [
@@ -25,13 +28,15 @@ import { FormsLibrosComponent } from './pages/libros/forms-libros.component';
     ErrorComponent,
     EditorialFormsComponent,
     FormsAutorComponent,
-    FormsLibrosComponent
+    FormsLibrosComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -83,7 +83,14 @@
             <div class="col-6">
                 <div class="mb-3">
                     <label class="form-label">Autor</label>
-                    <input type="number" formControlName="idAutor" class="form-control">
+                    <!-- <input type="number" formControlName="idAutor" class="form-control"> -->
+                    <select formControlName="idAutor" class="form-control">
+                        <option value="1">Gabriel Garcia Marquez</option>
+                        <option value="2">Paola Coelo</option>
+                        <option value="3">Homero</option>
+                        <option value="4">Virgilio</option>
+                        <option value="5">Pablo de Tarso</option>
+                    </select>
                     <div class="validationErrorRed">
                         <ng-container *ngFor="let validation of validationFormMessage.idAutor">
                             <div *ngIf="isValid('idAutor', validation.type)">
