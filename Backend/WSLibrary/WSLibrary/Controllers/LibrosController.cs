@@ -22,7 +22,7 @@ namespace WSLibrary.Controllers
             {
                 using (LibreriaContext db = new LibreriaContext())
                 {
-                    var lst = db.Libros.OrderByDescending(d => d.IdAutor).ToList();
+                    var lst = db.Libros.Where(d => d.Estado == true).OrderByDescending(d => d.IdAutor).ToList();
                     oRespuesta.Exito = 1;
                     oRespuesta.Data = lst;
                 }

@@ -40,13 +40,11 @@
             </td> -->
             <td class="text-center">
                 <button class="btn btn-success btn-sm mr-1 shadow-none" title="Modificar registro"
-                    (click)="goToLibro(libro)">
-                    Editar
+                    (click)="goToLibro(libro)">                    
                     <span class="icon icon-edit-3 text-white"></span>
                 </button>
                 <button class="btn btn-danger btn-sm shadow-none" title="Eliminar registro" data-toggle="modal"
-                    data-target="#deleteModal" (click)="delete(libro.id, indexOfelement)">
-                    Eliminar
+                    data-target="#deleteModal" (click)="anular(libro.id, indexOfelement)">                    
                     <span class="icon icon-trash-2 text-white"></span>
                 </button>
             </td>

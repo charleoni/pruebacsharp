@@ -53,7 +53,11 @@ public validationFormMessage = {
 }
 	title: string;
 	id: number;
-  constructor(private formBuilder: FormBuilder,private httpService: ApiserviceService, private route: ActivatedRoute,private storage: StorageService,private router: Router) {
+	autor: any;
+	autores: any;
+	editoriales: any;
+  constructor(private formBuilder: FormBuilder,private httpService: ApiserviceService, private api: ApiserviceService,
+	          private route: ActivatedRoute,private storage: StorageService,private router: Router) {
     this.form = this.formBuilder.group({
         Titulo: ['', [Validators.required]],
         Agno: ['', [Validators.required]],
@@ -78,8 +82,28 @@ public validationFormMessage = {
    }
 
   ngOnInit(): void {
+	  this.api.all('autor').subscribe(autores => {
+      this.autores = autores.data;
+      console.log(autores.data);
+      });      
+	  this.api.all('editorial').subscribe(editoriales => {
+      this.editoriales = editoriales.data;
+      console.log(editoriales.data);
+      });      
   }
 
+  goToCategory(category: any): void {
+    this.storage.save('__autor', category);
+    this.router.navigate(['/admin/parametros/categoria', category.id]);
+	this.storage.save('__editorial', category);
+    this.router.navigate(['/admin/parametros/categoria', category.id]);
+  }
+
+  /*setCategory(autores: any): void {
+    this.autores = autores;	
+  }*/
+
+  
   saveForm(){
     console.log(this.form.value)
     if(!this.form.valid){

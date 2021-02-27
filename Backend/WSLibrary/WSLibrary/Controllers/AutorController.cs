@@ -20,9 +20,9 @@ namespace WSLibrary.Controllers
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                using (LibreriaContext db = new LibreriaContext())
-                {
-                    var lst = db.Autores.OrderByDescending(d => d.IdAutor).ToList();
+                using (LibreriaContext db = new LibreriaContext())                    
+                {                    
+                    var lst = db.Autores.Where(x => x.Estado==true).OrderByDescending(d => d.IdAutor).ToList();
                     oRespuesta.Exito = 1;
                     oRespuesta.Data = lst;
                 }

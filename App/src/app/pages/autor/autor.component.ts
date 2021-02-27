@@ -38,9 +38,9 @@ export class AutorComponent implements OnInit {
 
   delete(id: number, posicion: number): void {
     this.api.delete(`autor/${id}`).subscribe(() => {
-      this.autores.map(item => {
-        
+      this.autores.map(item => {        
         if (item.idAutor === id) {
+          this.confirmar();
           this.autores.splice(posicion,1)
         }
       });
